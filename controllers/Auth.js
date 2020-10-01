@@ -2,6 +2,11 @@ const User = require("../models/User");
 const {check, validationResult} = require("express-validator");
 var jwt = require("jsonwebtoken");
 var expressJwt = require("express-jwt");
+const express = require("express");
+
+const app=express();
+
+app.use(expressJwt({ secret: process.env.SECRETCODE, algorithms: ['RS256']}));
 
 exports.signUp = (req, res)=>{
     const errors = validationResult(req);
