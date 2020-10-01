@@ -5,6 +5,7 @@ const express = require("express")
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+var expressJwt = require("express-jwt");
 
 
 //Write Routers
@@ -16,7 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
-app.use(expressjwt({credentialsRequired: true, secret: process.env.SECRETCODE, requestProperty: 'user'}));
+app.use("/api", expressJwt({ secret: process.env.SECRETCODE}));
 
 
 app.use("/api", authRouter);
