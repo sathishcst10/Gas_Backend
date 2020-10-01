@@ -6,7 +6,7 @@ const express = require("express");
 
 const app=express();
 
-app.use(expressJwt({ secret: process.env.SECRETCODE, algorithms: ['RS256']}));
+app.use("/api", expressJwt({ secret: process.env.SECRETCODE, algorithms: ['RS256']}));
 
 exports.signUp = (req, res)=>{
     const errors = validationResult(req);
