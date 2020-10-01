@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 var expressJwt = require("express-jwt");
 
-
+app.use("/api", expressJwt({ secret: process.env.SECRETCODE}));
 //Write Routers
 var authRouter = require("./routes/Auth");
 var certificateRouter = require("./routes/Certificates");
@@ -17,7 +17,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
-app.use("/api", expressJwt({ secret: process.env.SECRETCODE}));
+
 
 
 app.use("/api", authRouter);
