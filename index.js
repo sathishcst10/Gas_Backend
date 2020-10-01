@@ -7,11 +7,12 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 var expressJwt = require("express-jwt");
 
+const app = express();
+
 app.use("/api", expressJwt({ secret: process.env.SECRETCODE}));
 //Write Routers
 var authRouter = require("./routes/Auth");
 var certificateRouter = require("./routes/Certificates");
-const app = express();
 
 //Middlewares
 app.use(bodyParser.json());
