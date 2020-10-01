@@ -1,22 +1,22 @@
 require("dotenv").config();
 
-const mongoose = require("mongoose");
-const express = require("express")
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-var expressJwt = require("express-jwt");
+import { connect } from "mongoose";
+import express from "express";
+import { json } from "body-parser";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import expressJwt from "express-jwt";
 
 var Port = process.env.PORT || 8000;
 const app = express();
 
 //app.use(expressJwt({ secret: process.env.SECRETCODE, algorithms: ['RS256']}));
 //Write Routers
-var authRouter = require("./routes/Auth");
-var certificateRouter = require("./routes/Certificates");
+import authRouter from "./routes/Auth";
+import certificateRouter from "./routes/Certificates";
 
 //Middlewares
-app.use(bodyParser.json());
+app.use(json());
 app.use(cookieParser());
 app.use(cors());
 
@@ -33,7 +33,7 @@ app.listen(Port, (req, res)=>{
 
 //DB Connection
 
-mongoose.connect(process.env.DATABASE_URL,{
+connect(process.env.DATABASE_URL,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
