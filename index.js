@@ -10,7 +10,7 @@ var expressJwt = require("express-jwt");
 var Port = process.env.PORT || 8000;
 const app = express();
 
-app.use("/api", expressJwt({ secret: 'shhhhhhared-secret'}));
+app.use("/api", expressJwt({ secret: process.env.SECRETCODE, algorithms: ['RS256']}));
 //Write Routers
 var authRouter = require("./routes/Auth");
 var certificateRouter = require("./routes/Certificates");

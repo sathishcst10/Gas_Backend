@@ -76,8 +76,9 @@ exports.signOut =(req, res)=>{
     });
 };
 
-exports.isSigned = expressJwt({
+  exports.isSigned = expressJwt({
     secret : process.env.SECRETCODE,
+    algorithms: ['RS256'],
     userProperty: "auth"
 });
 
