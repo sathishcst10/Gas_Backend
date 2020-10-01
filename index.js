@@ -16,6 +16,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(cors());
+app.use(expressjwt({credentialsRequired: true, secret: process.env.SECRETCODE, requestProperty: 'user'}));
+
 
 app.use("/api", authRouter);
 app.use("/api", certificateRouter);
