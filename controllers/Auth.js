@@ -73,7 +73,9 @@ exports.signIn =(req,res)=>{
     });
 
 };
-
+exports.WelcomeAPI = (req,res)=>{
+    res.json("Welcome to the API");
+}
 exports.signOut =(req, res)=>{
     res.clearCookie("token");
     res.json({
