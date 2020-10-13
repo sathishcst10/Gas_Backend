@@ -6,6 +6,9 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 var expressJwt = require("express-jwt");
+const CryptoJS = require("crypto-js");
+
+
 
 var Port = process.env.PORT || 8000;
 const app = express();
@@ -25,7 +28,18 @@ app.use(cors());
 app.use("/api", authRouter);
 app.use("/api", certificateRouter);
 
+// const encryptionValue=(value, secretCode)=>{
+//     var cipherText = CryptoJS.AES.encrypt(value, secretCode).toString();
+//     return cipherText;
+// }
 
+
+const decryptionValue = (value, secretCode)=>{
+    var byteText = CryptoJS.AES.decrypt(value, secretCode);
+    var decryptedValue = byteText.toString(CryptoJS.enc.Utf8);
+    return decryptedValue;
+};
+ 
 app.listen(Port, (req, res)=>{
     // res.send("Welcome");
     console.log(`App started with Port: ${Port}`)
@@ -33,11 +47,10 @@ app.listen(Port, (req, res)=>{
 
 //DB Connection
 
-mongoose.connect(process.env.DATABASE_URL,{
+mongoose.connect(decryptionValue(`${process.env.DATABASE_URL_ENCRY}`, `${process.env.SECRETCODE}`),{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
 }).then(()=>{
     console.log("DB Connected");
-})
-
+});
