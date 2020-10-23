@@ -5,7 +5,6 @@ const express = require("express")
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-var expressJwt = require("express-jwt");
 const CryptoJS = require("crypto-js");
 
 
@@ -41,13 +40,13 @@ const decryptionValue = (value, secretCode)=>{
 };
  
 app.listen(Port, (req, res)=>{
-    // res.send("Welcome");
     console.log(`App started with Port: ${Port}`)
 });
 
 //DB Connection
 
-mongoose.connect(decryptionValue(`${process.env.DATABASE_URL_ENCRY}`, `${process.env.SECRETCODE}`),{
+mongoose.connect(decryptionValue(`${process.env.DATABASE_URL_ENCRY}`, `${process.env.SECRETCODE}`),
+{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true
